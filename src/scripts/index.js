@@ -1,30 +1,30 @@
 const apikey="bd4d93f885b94aaeab1442e4aaa6f770";
 var article_area=document.getElementById("news-articles");
 function getNews(news){
-  let output="";
-  if(news.totalResults>0){
-    news.articles.forEach(ind=>{
-      output+= 
-        ` <section class="container">
-          <li class="article"><a class="article-link" href="${ind.url}" target="_blank">
-          <div class="img_area">
-          <img src="${ind.urlToImage}" class="article-img" alt="${ind.title}"></img>
-          </div>
-          <div class="article-title">${ind.title}</div>
-          <div class="article-description">${ind.description || "Description not available"}</div> <br>
-          <div class="article-author">-${ind.author? ind.author: "Anon"}</div><br>
-          </a>
-          </li>
-          </section>
-        `;
-    });
-    article_area.innerHTML=output;
-  }
-  else
-  { 
-    article_area.innerHTML='<li class="not-found">No article was found based on the search.</li>';
-  }
-};
+    let output="";
+    if(news.totalResults>0){
+      news.articles.forEach(ind=>{
+        output+= 
+          ` <section class="container">
+            <li class="article"><a class="article-link" href="${ind.url}" target="_blank">
+            <div class="img_area">
+            <img src="${ind.urlToImage}" class="article-img" alt="${ind.title}"></img>
+            </div>
+            <h2 class="article-title">${ind.title}</h2>
+            <p class="article-description">${ind.description || "Description not available"}</p> <br>
+            <span class="article-author">-${ind.author? ind.author: "Anon"}</span><br>
+            </a>
+            </li>
+            </section>
+          `;
+      });
+      article_area.innerHTML=output;
+    }
+    else
+    { 
+      article_area.innerHTML='<li class="not-found">No article was found based on the search.</li>';
+    }
+  };
 async function retreive(searchValue=""){
 
     article_area.innerHTML='<p class="load">Loading...</p>';

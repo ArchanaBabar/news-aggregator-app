@@ -1,2 +1,153 @@
 @import "./reset.css";
 
+@import "./reset.css";
+
+:root {
+    --background-body-color: black;
+    --font-color:black;
+    --border-color:white;
+    --box-color:rgba(39, 35, 35, 0.986);
+    --img-background:black;
+    --box-shadow:wheat;
+    --author-color:rgb(43, 173, 216);
+    --border-line-color:white;
+  }
+  body{
+      background-color: black;
+  }
+  
+  .site-title {
+    color: white;
+    font-size: 31px;
+    font-family: 'Trebuchet MS';
+    border: white 5px solid;
+    margin-left: 40%;
+    padding: 10px;
+    padding-left: 23px;
+    padding-right: 23px;
+    display: inline-block;
+  }
+  
+  .search-bar {
+    margin-top: 4%;
+    margin-left: 5%;
+    margin-bottom: 70px;
+  }
+  
+  #search {
+    width: 92%;
+    height: 30px;
+    background-color: black;
+    font-size: large;
+    padding: 20px;
+    font-size: 30px;
+    color: white;
+    border-top: black;
+    border-left: black;
+    border-right: black;
+  }
+  
+  #news-articles {
+    margin-left: 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  
+  .container {
+    max-width: 265px;
+    border: white 5px solid;
+    height: 480px;
+    padding: 35px;
+    margin-left: 9px;
+    background-color:black;
+    margin-bottom: 20px;
+    border-radius: 18px;
+    padding-right: 30px;
+  }
+  
+  .article {
+    list-style-type: none;
+    display: inline;
+  }
+  
+  .container:hover {
+    -webkit-transform: scale(1.03);
+            transform: scale(1.03);
+    -webkit-box-shadow: 0 0 5px blue;
+            box-shadow: 0 0 5px blue;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .img_area {
+    width: 265px;
+    height: 250px;
+    background-color:white;
+  }
+  
+  .article-img {
+    margin-top: 20px;
+    width: 265px;
+    height: 205px;
+  }
+  
+  .article-title {
+    background: none;
+    font-family: sans-serif;
+    overflow: hidden;
+    margin-top: 15px;
+
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  
+  .article-description {
+    font-size: 20px;
+    color: white;
+    background: none;
+    overflow: hidden;
+    margin-top: 15px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-family: sans-serif;
+  }
+  
+  .article-author {
+    background: none;
+    font-size: 20px;
+    font-family: Trebuchet MS;
+    color: blue ;
+    display: block;
+    text-align: right;
+    
+  }
+  
+  .article-link {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .not-found {
+    color:white;
+    font-family: sans-serif;
+    font-size: 35px;
+    margin-left: 25px;
+    list-style-type: none;
+  }
+  
+  .load {
+    color: white;
+    font-family: sans-serif;
+    font-size: 35px;
+    margin-left: 25px;
+  }
+ 
+  
+

@@ -10,9 +10,9 @@ function getNews(news){
           <div class="img_area">
           <img src="${ind.urlToImage}" class="article-img" alt="${ind.title}"></img>
           </div>
-          <h2 class="article-title">${ind.title}</h2>
-          <p class="article-description">${ind.description || "Description not available"}</p> <br>
-          <span class="article-author">-${ind.author? ind.author: "Anon"}</span><br>
+          <div class="article-title">${ind.title}</div>
+          <div class="article-description">${ind.description || "Description not available"}</div> <br>
+          <div class="article-author">-${ind.author? ind.author: "Anon"}</div><br>
           </a>
           </li>
           </section>

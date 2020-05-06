@@ -146,3 +146,84 @@
   }
  
   
+
+  @media only screen and (max-width: 600px) {
+    .site-title {
+      color: white;
+      font-size: 25px;
+      font-family: 'Trebuchet MS';
+      border: white 1px solid;
+      margin-left: 10%;
+      margin-top: 4%;
+      padding: 10px;
+      padding-left: 23px;
+      padding-right: 23px;
+      display: inline-block;
+    }
+    
+    .search-bar {
+      width: 580px;
+      margin: 0px;
+      padding: 0px;
+    }
+    #search {
+      width: 55%;
+      height: 20px;
+      background-color: black;
+      margin-left: 2%;
+      padding: 20px;
+      font-size: 20px;
+      color: white;
+      border-top: black;
+      border-left: black;
+      border-right: black;
+    }
+    .container {
+      max-width: 240px;
+      border: white 5px solid;
+      height: 550px;
+      padding: 35px;
+      background-color: black;
+      margin-bottom: 20px;
+      border-radius: 18px;
+      padding-right: 30px;
+      margin-left: -18px;
+      margin-top: 10px;
+    }
+    #news-articles {
+      margin-left: 2px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+    }
+    .not-found {
+      color: white;
+      font-family: sans-serif;
+      font-size: 25px;
+      margin-left: -20px;
+      list-style-type: none;
+    }
+    .load {
+      color: white;
+      font-family: sans-serif;
+      font-size: 25px;
+      margin-left: 25px;
+    }
+    .article {
+      list-style-type: none;
+      display: inline-block;
+      margin-left: -14px;
+    }
+    .img_area {
+      width: 265px;
+      height: 250px;
+      background-color: white;
+    }
+    .article-img {
+      margin-top: 20px;
+      width: 265px;
+      height: 205px;
+    }
+  }

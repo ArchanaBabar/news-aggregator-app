@@ -1,6 +1,5 @@
 window.addEventListener("load", () => {
 
-    //const response = await fetch(`https://newsapi.org/v2/top-headlines?country=in&apiKey=bd4d93f885b94aaeab1442e4aaa6f770`);
 
     let input = document.getElementById('search');
 
@@ -10,8 +9,17 @@ window.addEventListener("load", () => {
         }
     })
     async function fetchData(inputKey) {
-        const response = await fetch(`https://newsapi.org/v2/top-headlines?country=in&apiKey=bd4d93f885b94aaeab1442e4aaa6f770`);
+        if(inputKey!=""){
+            url= `https://newsapi.org/v2/everything?q=${inputKey}&apiKey=bd4d93f885b94aaeab1442e4aaa6f770`
+
+        }
+
+        else{
+            url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=bd4d93f885b94aaeab1442e4aaa6f770`;
+        }
+        const response=await fetch(url);
         const data = await response.json();
+        
         // console.log(data);
         let display = document.getElementById('news-articles');
         let newsHtml = "";
@@ -52,8 +60,6 @@ window.addEventListener("load", () => {
     });
 
     fetchData('india');
-
-    //************** color theme *************/
     const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
     const currentTheme = localStorage.getItem('theme');
 

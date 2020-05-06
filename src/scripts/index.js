@@ -1,77 +1,81 @@
-// Lite Mode/Dark Mode Toggle Function//
-document.querySelector("#toggle_action").addEventListener('change',toggle_func)
+window.addEventListener("load", () => {
 
-function toggle_func(e){
-  if (e.target.checked)
-   {
-    document.documentElement.setAttribute('data-theme', 'lite');
-    document.querySelector(".toggletxt").innerHTML="Toggle to Dark Mode";
-    }
-else
-   {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.querySelector(".toggletxt").innerHTML="Toggle to Lite Mode";
-   }   
-}
+    //const response = await fetch(`https://newsapi.org/v2/top-headlines?country=in&apiKey=bd4d93f885b94aaeab1442e4aaa6f770`);
 
-//Api-Key//
-const apikey="bd4d93f885b94aaeab1442e4aaa6f770";
-var article_area=document.getElementById("news-articles");
-//Function to have formatted NEWS//
-function getNews(news){
-  let output="";
-  if(news.totalResults>0){
-    news.articles.forEach(ind=>{
-      output+= 
-        ` <section class="container">
-          <li class="article"><a class="article-link" href="${ind.url}" target="_blank">
-          <div class="img_area">
-          <img src="${ind.urlToImage}" class="article-img" alt="${ind.title}"></img>
-          </div>
-          <h2 class="article-title">${ind.title}</h2>
-          <p class="article-description">${ind.description || "Description not available"}</p> <br>
-          <span class="article-author">-${ind.author? ind.author: "Anon"}</span><br>
-          </a>
-          </li>
-          </section>
-        `;
+    let input = document.getElementById('search');
+
+    input.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13) {
+            fetchData(e.target.value);
+        }
+    })
+    async function fetchData(inputKey) {
+        const response = await fetch(`https://newsapi.org/v2/top-headlines?country=in&apiKey=bd4d93f885b94aaeab1442e4aaa6f770`);
+        const data = await response.json();
+        // console.log(data);
+        let display = document.getElementById('news-articles');
+        let newsHtml = "";
+        data.articles.map(function (article) {
+            let news = ` 
+             <li class="article">
+             <div id="news-container">
+             <img class="article-img" src="${article.urlToImage}" alt="article-img">
+             <h2 class="article-title">${article.title}</h2>
+             <p class="article-description">${article.description}</p>
+             <span class="article-author">${article.author}</span>
+             <a class="article-link" href="${article.url}" target="_blank">see more</a>
+             </div>
+             </li>
+               `;
+            newsHtml += news;
+        });
+        display.innerHTML = newsHtml;
+        if (data.articles.length === 0) {
+            document.getElementById('msg').innerHTML = 'No article was found based on the search.';
+            e.preventDefault();
+        }
+    };
+
+    input.addEventListener("input", e => {
+        const inputKey = input.value;
+        if (inputKey == '') {
+            document.getElementById('msg').innerHTML = ""
+            fetchData('india');
+            document.getElementsByClassName('loader').style.display = "none";
+        }
+        else {
+            fetchData(inputKey);
+            e.preventDefault();
+            document.getElementsByClassName('loader').style.display = "none";
+        }
+
     });
-    article_area.innerHTML=output;
-  }
-  else
-  { 
-    article_area.innerHTML='<li class="not-found">No article was found based on the search.</li>';
-  }
-};
-// Function to retreive news using Fetch API with Await//
-async function retreive(searchValueText=""){
 
-    article_area.innerHTML='<p class="load">News are Loading...</p>';
-    
-    if(searchValueText!=""){
-      url=`https://newsapi.org/v2/everything?q=${searchValueText}&apiKey=${apikey}`;
+    fetchData('india');
+
+    //************** color theme *************/
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        if (currentTheme === 'dark') {
+            toggleSwitch.checked = true;
+        }
     }
-    else
-    {
-      url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=${apikey}`;
+
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        }
+        else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
     }
-    const response=await fetch(url);
-    const result=await response.json();
-    getNews(result);
-}
-//Get text value from Searchbar and pass to retreive function//
-async function searchvalue(e){  
-    if (event.which === 13 || event.keyCode === 13 || event.key === "Enter")
-     {
-      retreive(e.target.value);
-     }
-};
-//Attached Event listener for Searchbar to retreive text from Searchbar//
-function start(){
-  document.getElementById("search").addEventListener('keypress',searchvalue);
-  retreive();
-}
-//Initializing Function//
-(function(){
-  start();}
-)();
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+});

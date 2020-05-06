@@ -1,56 +1,76 @@
-const apikey="bd4d93f885b94aaeab1442e4aaa6f770";
-var article_area=document.getElementById("news-articles");
-function getNews(news){
-    let output="";
-    if(news.totalResults>0){
-      news.articles.forEach(ind=>{
-        output+= 
-          ` <section class="container">
-            <li class="article"><a class="article-link" href="${ind.url}" target="_blank">
-            <div class="img_area">
-            <img src="${ind.urlToImage}" class="article-img" alt="${ind.title}"></img>
-            </div>
-            <h2 class="article-title">${ind.title}</h2>
-            <p class="article-description">${ind.description || "Description not available"}</p> <br>
-            <span class="article-author">-${ind.author? ind.author: "Anon"}</span><br>
-            </a>
-            </li>
-            </section>
-          `;
+window.addEventListener("load", () => {
+  let input = document.getElementById('search');
+  input.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) {
+          fetchData(e.target.value);
+      }
+  })
+  async function fetchData(inputKey) {
+      const response = await fetch(`http://newsapi.org/v2/top-headlines?q=${inputKey}&sortBy=popularity&apiKey=bd4d93f885b94aaeab1442e4aaa6f770`);
+      const data = await response.json();
+  
+      let display = document.getElementById('news-articles');
+      let newsHtml = "";
+      data.articles.map(function (article) {
+          let news = ` 
+           <li class="article">
+           <div id="news-container">
+           <img class="article-img" src="${article.urlToImage}" alt="article-img">
+           <h2 class="article-title">${article.title}</h2>
+           <p class="article-description">${article.description}</p>
+           <span class="article-author">${article.author}</span>
+           <a class="article-link" href="${article.url}" target="_blank">see more</a>
+           </div>
+           </li>
+             `;
+          newsHtml += news;
       });
-      article_area.innerHTML=output;
-    }
-    else
-    { 
-      article_area.innerHTML='<li class="not-found">No article was found based on the search.</li>';
-    }
+      display.innerHTML = newsHtml;
+      if (data.articles.length === 0) {
+          document.getElementById('msg').innerHTML = 'No article was found based on the search.';
+          e.preventDefault();
+      }
   };
-async function retreive(searchValue=""){
 
-    article_area.innerHTML='<p class="load">News are Loading....</p>';
-    
-    if(searchValue!=""){
-      url=`https://newsapi.org/v2/everything?q=${searchValue}&apiKey=${apikey}`;
-    }
-    else
-    {
-      url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=${apikey}`;
-    }
-    const response=await fetch(url);
-    const result=await response.json();
-    getNews(result);
-}
-async function searchvalue(e){  
-    if (event.keyCode === 13 || event.key === "Enter")
-     {
-      retreive(e.target.value);
-     }
-};
-function start(){
-  document.getElementById("search").addEventListener('keypress',searchvalue);
-  retreive();
-}
-(function(){
-  start();}
-)();
+  input.addEventListener("input", e => {
+      const inputKey = input.value;
+      if (inputKey == '') {
+          document.getElementById('msg').innerHTML = ""
+          fetchData('india');
+          document.getElementsByClassName('loader').style.display = "none";
+      }
+      else {
+          fetchData(inputKey);
+          e.preventDefault();
+          document.getElementsByClassName('loader').style.display = "none";
+      }
 
+  });
+
+  fetchData('india');
+
+  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+  const currentTheme = localStorage.getItem('theme');
+
+  if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+
+      if (currentTheme === 'dark') {
+          toggleSwitch.checked = true;
+      }
+  }
+
+  function switchTheme(e) {
+      if (e.target.checked) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+      }
+      else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+      }
+  }
+
+  toggleSwitch.addEventListener('change', switchTheme, false);
+
+});

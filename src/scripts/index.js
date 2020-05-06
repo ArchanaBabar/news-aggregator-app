@@ -19,8 +19,7 @@ window.addEventListener("load", () => {
         }
         const response=await fetch(url);
         const data = await response.json();
-        
-        // console.log(data);
+      
         let display = document.getElementById('news-articles');
         let newsHtml = "";
         data.articles.map(function (article) {

@@ -6,7 +6,9 @@ function getNews(news){
       news.articles.forEach(ind=>{
         output+= 
           ` <section class="container">
-            <li class="article"><a class="article-link" href="${ind.url}" target="_blank">
+             
+            <li class="article">
+            <a class="article-link" href="${ind.url}" target="_blank">
             <div class="img_area">
             <img src="${ind.urlToImage}" class="article-img" alt="${ind.title}"></img>
             </div>

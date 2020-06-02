@@ -27,7 +27,10 @@ function getNews(news){
       article_area.innerHTML='<li class="not-found">No article was found based on the search.</li>';
     }
   };
+  document.getElementsByClassName('loader').style.display = "";
   async function retreive(searchValue=""){
+
+    
 
     article_area.innerHTML='<p class="load">News are Loading....</p>';
     

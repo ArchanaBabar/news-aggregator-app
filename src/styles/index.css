@@ -232,8 +232,8 @@ body {
             transform: rotate(360deg);
   }
 }
-
-/* Extra small devices (phones, 600px and down) */
+/* 
+Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   #news-articles {
     -ms-grid-columns: 100%;
@@ -254,4 +254,3 @@ body {
         grid-template-columns: 50% 50%;
   }
 }
-/*# sourceMappingURL=index.css.map */

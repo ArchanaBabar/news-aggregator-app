@@ -8,7 +8,6 @@ window.addEventListener("load", () => {
   async function fetchData(inputKey) {
       const response = await fetch(`http://newsapi.org/v2/top-headlines?q=${inputKey}&sortBy=popularity&apiKey=bd4d93f885b94aaeab1442e4aaa6f770`);
       const data = await response.json();
-      // console.log(data);
       let display = document.getElementById('news-articles');
       let newsHtml = "";
       data.articles.map(function (article) {
@@ -49,7 +48,7 @@ window.addEventListener("load", () => {
 
   fetchData('india');
 
-  //************** color theme *************/
+  //Toggle Switch 
   const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
   const currentTheme = localStorage.getItem('theme');
 
